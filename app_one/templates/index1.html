@@ -1,0 +1,37 @@
+{% extends 'index.html'%}
+
+
+{% block content %}
+
+<div class="container">
+    <h1>welcom to the grate number game </h1>
+    <h3>i'm thinking with number between 1 and 100</h3>
+    <h3>take a guess!!</h3>
+
+    {% if arterCheck == 2 %}
+    <div class="d-flex justify-content-center" style="background-color: rgb(177, 60, 60)  ;">
+        <p>too high!</p>
+    </div>
+    {% endif %}
+    {% if arterCheck == 1 %}
+    <div class="d-flex justify-content-center" style="background-color: rgb(177, 60, 60) ; ">
+        <p>too low!</p>
+    </div>
+    {% endif %}
+    {% if arterCheck == 0 %}
+    <div class="d-flex justify-content-center" id="correct" style="background-color: rgb(37, 144, 105) ;">
+        <p> <span>{{request.session.great_num}}</span> was the number!</p>
+    </div>
+    {% endif %}
+    <br><br>
+
+    <form action="/route" method="POST">
+        {% csrf_token %}
+        <label for="num"></label>
+        <input type="number" name="num" min="0" max="100">
+        <button type="submit">submit</button>
+    </form>
+</div>
+
+
+{% endblock %}
